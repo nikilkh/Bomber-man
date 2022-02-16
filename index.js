@@ -1,5 +1,12 @@
 const bombs=[];
+let Gamepoints = 0;
+let canplay = true;
 
+
+function updategamepoints(){
+    const gamepoints = document.getElementById("gp");
+    gamepoints.innerHTML = "Your score= " + Gamepoints;
+}
 function addgrid(){
     const appelement = document.getElementById("app");
     for(let i=0; i<9; i++){
@@ -19,15 +26,29 @@ function addgrid(){
 
 
             column.addEventListener("click", function(){
-                if (bombs.includes(index)){
-                    column.style.background = "red"
+                if(canplay){
+                    if (bombs.includes(index)){
+                        column.style.background = "red"
+                        canplay = false;
+                        
+                        }
+
+                        
+                        
+                        
+                        
                     
-                    
-                }else{
-                    column.style.background = "green"
+                    else{
+                        column.style.background = "green"
+                        Gamepoints++;
+                        updategamepoints();
+    
+                    }
+                }
 
                 }
-            })
+                
+            )
             row.appendChild(column);
 
 
@@ -55,3 +76,4 @@ function generatebombs(){
 addgrid();
 generatebombs();
 console.log(bombs)
+
